@@ -7,5 +7,6 @@ const transactionsController = new TransactionsController();
 const transactionsRoutes = Router();
 
 transactionsRoutes.post("/", transactionsController.create);
+transactionsRoutes.get("/", transactionsController.index);
 
 export { transactionsRoutes };
