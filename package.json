@@ -3,10 +3,22 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "tsx watch src/server.ts"
   },
   "keywords": [],
   "author": "Vinícius Barbosa Santos",
   "license": "ISC",
-  "description": "API Sistema Financeiro"
+  "description": "API Sistema Financeiro",
+  "devDependencies": {
+    "@types/express": "^5.0.4",
+    "@types/node": "^24.9.1",
+    "ts-node": "^10.9.2",
+    "tsup": "^8.5.0",
+    "txs": "^1.0.0",
+    "typescript": "^5.9.3"
+  },
+  "dependencies": {
+    "express": "^5.1.0",
+    "tsx": "^4.20.6"
+  }
 }
