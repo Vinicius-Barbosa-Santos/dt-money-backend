@@ -1,8 +1,12 @@
 import { Request, Response } from "express";
 
+import z from "zod";
+
 class TransactionsController {
   async create(request: Request, response: Response) {
-    return response.status(200).json({ message: "Hello World" });
+    return response.json({
+      message: "Transaction created",
+    });
   }
 }
 
