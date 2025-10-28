@@ -8,5 +8,6 @@ const transactionsRoutes = Router();
 
 transactionsRoutes.post("/", transactionsController.create);
 transactionsRoutes.get("/", transactionsController.index);
+transactionsRoutes.get("/summary", transactionsController.summary);
 
 export { transactionsRoutes };

@@ -18,7 +18,7 @@ class TransactionsController {
     const { description, price, category, type } =
       createTransactionBodySchema.parse(request.body);
 
-    await prisma.transaction.create({
+    const transaction = await prisma.transaction.create({
       data: {
         description,
         price,
@@ -27,7 +27,7 @@ class TransactionsController {
       },
     });
 
-    return response.json();
+    return response.status(201).json(transaction);
   }
 
   async index(request: Request, response: Response) {
@@ -46,6 +46,25 @@ class TransactionsController {
     });
 
     return response.json(transactions);
+  }
+
+  async summary(request: Request, response: Response) {
+    const [incomeAgg, outcomeAgg] = await Promise.all([
+      prisma.transaction.aggregate({
+        where: { type: "INCOME" },
+        _sum: { price: true },
+      }),
+      prisma.transaction.aggregate({
+        where: { type: "OUTCOME" },
+        _sum: { price: true },
+      }),
+    ]);
+
+    const income = incomeAgg._sum.price ?? 0;
+    const outcome = outcomeAgg._sum.price ?? 0;
+    const total = income - outcome;
+
+    return response.json({ income, outcome, total });
   }
 }
 
